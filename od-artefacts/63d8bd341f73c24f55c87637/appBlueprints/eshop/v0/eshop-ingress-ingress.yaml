@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eshop-ingress
+  namespace: eshop
+  labels:
+    name: eshop-ingress
+  annotations:
+    omnideqname: eshop(app)->eshop(blueprint)->eshop-ingress(ingress)
+spec:
+  ingressClassName: <youringressclassname>
+  rules:
+    - host: eshop.demo.ch-tgt.com
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            path: /
+            backend:
+              service:
+                name: nginx
+                port:
+                  number: 80

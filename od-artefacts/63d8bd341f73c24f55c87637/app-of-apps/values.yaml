@@ -1,0 +1,9 @@
+
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: git@github.com:Cloudhedge/od-eks-blueprints.git
+    targetRevision: main
+  ingress:
+    host: ingress-host
