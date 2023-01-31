@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: app-host
+  namespace: eshop
+  labels:
+    name: app-host
+  annotations:
+    omnideqname: eshop(app)->eshop(blueprint)->app-host(dep)
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-host
+  template:
+    metadata:
+      labels:
+        app: app-host
+      annotations: {}
+    spec:
+      containers:
+        - name: app-host
+          image: harbor.proserv.cloudhedge.io/apps/eshop-app-host:v0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: eshop-app-host-envvars
+            - secretRef:
+                name: app-host-2022-07-21t11-03-00-894z
+          volumeMounts: []
+      volumes: []
+      hostAliases: []
+      imagePullSecrets:
+        - name: app-host-2022-07-21t11-03-00-894z
+      nodeSelector:
+        kubernetes.io/os: linux
+      terminationGracePeriodSeconds: 30
