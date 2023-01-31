@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eshop-app-host-nginx-db-host-envvars
+  namespace: eshop
+  labels:
+    name: eshop-app-host-nginx-db-host-envvars
+  annotations:
+    omnideqname: eshop(app)->eshop(blueprint)->db-host(dep)->db-host(container)->eshop-app-host-nginx-db-host-envvars(cmap)-env(cmapoption)
+data:
+  LANG: en_US.UTF-8
+  SHELL: /bin/bash
+  PGSYSCONFDIR: /etc
+  PGDATA: /var/lib/pgsql/data
+  PG_GRANDPARENT_PID: '1'
+  SHLVL: '0'
+  PWD: /
+  PGPORT: '5432'
+  USER: postgres
+  PGLOCALEDIR: /usr/share/locale
+  PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+  LOGNAME: postgres
+  HOME: /var/lib/pgsql

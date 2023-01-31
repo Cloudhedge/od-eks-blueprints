@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nginx
+  namespace: eshop
+  labels:
+    name: nginx
+  annotations:
+    omnideqname: eshop(app)->eshop(blueprint)->nginx(dep)
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+      annotations: {}
+    spec:
+      containers:
+        - name: nginx
+          image: harbor.proserv.cloudhedge.io/apps/eshop-wave-nginx:v0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          envFrom:
+            - secretRef:
+                name: nginx-2022-07-21t10-57-34-673z
+          volumeMounts: []
+      volumes: []
+      hostAliases: []
+      imagePullSecrets:
+        - name: nginx-2022-07-21t10-57-34-673z
+      nodeSelector:
+        kubernetes.io/os: linux
+      terminationGracePeriodSeconds: 30
